@@ -1,0 +1,93 @@
+SISTEMA DE VENDAS COM COMISSOES, METAS E PERFORMANCE
+COMO EXECUTAR PELO MYSQL WORKBENCH (SEM THUNDER CLIENT)
+
+1. O QUE FOI ADICIONADO
+
+O arquivo atividade_avaliativa_03.sql permite criar o banco, as tabelas, cadastrar quatro regioes, cinco vendedores e quinze vendas de exemplo, alem de executar consultas e alteracoes SQL diretamente no banco.
+
+O arquivo atividade_avaliativa_03.js foi mantido para preservar a API Node.js da estrutura original. O Thunder Client nao e necessario para executar o arquivo SQL.
+
+2. ABRIR O ARQUIVO SQL
+
+1. Abra o MySQL Workbench.
+2. Conecte-se ao seu servidor MySQL local.
+3. Abra o arquivo atividade_avaliativa_03.sql (File > Open SQL Script).
+4. Leia o aviso no inicio do arquivo antes de executar.
+5. Clique no raio para executar o script.
+
+ATENCAO: o script usa DROP TABLE para recriar as tabelas. Isso apaga as tabelas vendas, vendedores e regioes que ja existirem no banco db_vendas. Se voce tiver dados que precisa manter, remova ou comente os tres comandos DROP TABLE antes de executar.
+
+3. COMO EXECUTAR OS COMANDOS
+
+O script esta organizado em partes:
+- CREATE DATABASE / CREATE TABLE: criam o banco e as tabelas.
+- INSERT INTO: cadastra regioes, vendedores e vendas.
+- SELECT: consulta os dados e gera indicadores.
+- UPDATE: altera a meta ou desativa um vendedor. Os exemplos estao comentados para nao alterar os dados automaticamente.
+- DELETE: exclui uma venda. O exemplo tambem esta comentado.
+
+Para testar um UPDATE ou DELETE, retire os dois hifens do inicio da linha e execute somente aquele comando. Confira o resultado com um SELECT.
+
+4. EXEMPLOS DE DML PARA TESTAR MANUALMENTE
+
+Cadastrar um vendedor:
+INSERT INTO vendedores (nome, meta_mensal, percentual_base)
+VALUES ('Fernanda Lima', 14000.00, 5.00);
+
+Consultar vendedores:
+SELECT * FROM vendedores;
+
+Alterar uma meta:
+UPDATE vendedores
+SET meta_mensal = 16000.00
+WHERE id_vendedor = 1;
+
+Consultar vendas de um vendedor:
+SELECT * FROM vendas
+WHERE id_vendedor = 1;
+
+Consultar vendas de uma regiao:
+SELECT * FROM vendas
+WHERE id_regiao = 1;
+
+Excluir uma venda de teste:
+DELETE FROM vendas
+WHERE id_venda = 15;
+
+Execute o DELETE somente se realmente quiser apagar essa venda.
+
+5. IMPORTANTE SOBRE A COMISSAO
+
+A regra da atividade e:
+comissao = valor da venda * (percentual base + percentual do cliente + bonus da regiao) / 100
+
+PF acrescenta 2 pontos percentuais; PJ acrescenta 3. Os bonus regionais estao cadastrados na tabela regioes.
+
+O script SQL preenche valor_comissao nas vendas de exemplo para permitir executar consultas imediatamente. Se cadastrar novas vendas manualmente, calcule o valor da comissao antes do INSERT usando os percentuais do vendedor, do cliente e da regiao.
+
+6. SOBRE A API NODE.JS
+
+Se a entrega exigir tambem a API REST, mantenha o arquivo atividade_avaliativa_03.js e configure o arquivo .env com os dados de conexao do MySQL. No terminal do VS Code, execute uma vez:
+
+npm init -y
+npm install express mysql2 dotenv
+
+Depois inicie a API com:
+
+node atividade_avaliativa_03.js
+
+Esses comandos iniciam a aplicacao Node.js; nao sao comandos SQL. Para realizar os cadastros e consultas descritos neste documento, use o arquivo .sql no MySQL Workbench.
+
+7. ESTRUTURA DO PROJETO
+
+atividade_avaliativa_03/
+|-- atividade_avaliativa_03.js
+|-- atividade_avaliativa_03.sql
+|-- como_executar_sql.txt
+|-- .env                 (criar localmente; nao compartilhar senha)
+|-- .gitignore
+|-- package.json         (gerado pelo npm init -y)
+|-- package-lock.json    (gerado pelo npm)
+|-- node_modules/         (gerada pelo npm; nao enviar ao GitHub)
+
+FIM

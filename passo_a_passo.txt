@@ -1,0 +1,587 @@
+1. INICIALIZAR O NODE
+
+Execute:
+
+npm init -y
+
+2. INSTALAR AS BIBLIOTECAS
+
+Execute:
+
+npm install express mysql2 dotenv
+
+3. CRIAR O ARQUIVO .ENV
+
+Na mesma pasta do arquivo atividade_avaliativa_03.js, crie:
+
+.env
+
+Exemplo:
+
+DB_HOST=localhost
+DB_USER=root
+DB_PASSWORD=sua_senha
+DB_NAME=db_vendas
+DB_PORT=3306
+PORT=3000
+
+Se o MySQL não tiver senha:
+
+DB_PASSWORD=
+
+4. INICIAR A API
+
+No terminal:
+
+node atividade_avaliativa_03.js
+
+Se estiver funcionando, aparecerá:
+
+Servidor funcionando na porta 3000
+
+5. TESTAR SE A API ESTÁ FUNCIONANDO
+
+Antes dos outros testes, abra o Thunder Client.
+
+Método:
+
+GET
+
+URL:
+
+http://localhost:3000/
+
+Clique em Send.
+
+Resposta esperada:
+
+{
+"mensagem": "API funcionando!"
+}
+
+6. ABRIR O THUNDER CLIENT
+
+No Visual Studio Code:
+
+1. Abra a extensão Thunder Client.
+
+2. Clique em New Request.
+
+3. Escolha o método HTTP.
+
+4. Informe a URL.
+
+5. Para POST e PUT, abra Body.
+
+6. Selecione JSON.
+
+7. Informe o JSON.
+
+8. Clique em Send.
+
+9. TESTE - CADASTRAR VENDEDOR
+
+Método:
+
+POST
+
+URL:
+
+http://localhost:3000/vendedores
+
+Body -> JSON:
+
+{
+"nome": "João Silva",
+"meta_mensal": 10000,
+"percentual_base": 5
+}
+
+Resposta esperada:
+
+Mensagem informando que o vendedor foi cadastrado.
+
+8. CADASTRAR OS OUTROS VENDEDORES
+
+Faça pelo menos 5 vendedores, conforme solicitado na atividade.
+
+Vendedor 2:
+
+{
+"nome": "Maria Souza",
+"meta_mensal": 12000,
+"percentual_base": 5
+}
+
+Vendedor 3:
+
+{
+"nome": "Carlos Oliveira",
+"meta_mensal": 15000,
+"percentual_base": 6
+}
+
+Vendedor 4:
+
+{
+"nome": "Ana Santos",
+"meta_mensal": 11000,
+"percentual_base": 4
+}
+
+Vendedor 5:
+
+{
+"nome": "Pedro Costa",
+"meta_mensal": 13000,
+"percentual_base": 5
+}
+
+9. TESTE - LISTAR VENDEDORES
+
+Método:
+
+GET
+
+URL:
+
+http://localhost:3000/vendedores
+
+Clique em Send.
+
+Devem aparecer os vendedores cadastrados.
+
+10. TESTE - CONSULTAR VENDEDOR
+
+Método:
+
+GET
+
+URL:
+
+http://localhost:3000/vendedores/1
+
+Clique em Send.
+
+Deve aparecer o vendedor de código 1.
+
+11. TESTE - ATUALIZAR VENDEDOR
+
+Método:
+
+PUT
+
+URL:
+
+http://localhost:3000/vendedores/1
+
+Body:
+
+{
+"meta_mensal": 15000,
+"percentual_base": 6
+}
+
+Clique em Send.
+
+Deve aparecer:
+
+{
+"mensagem": "Vendedor atualizado com sucesso"
+}
+
+12. TESTE - REGISTRAR VENDA E CALCULAR COMISSÃO
+
+Método:
+
+POST
+
+URL:
+
+http://localhost:3000/vendas
+
+Body:
+
+{
+"id_venda": 1,
+"id_vendedor": 1,
+"id_regiao": 1,
+"data_venda": "2026-10-09 10:00:00",
+"valor_venda": 2000,
+"tipo_cliente": "PF"
+}
+
+Neste exemplo:
+
+Vendedor = 6%
+PF = 2%
+Norte = 1%
+
+Total = 9%
+
+Comissão:
+
+2000 x 9 / 100 = 180
+
+A resposta deverá apresentar:
+
+"valor_comissao": 180
+
+13. REGISTRAR 15 VENDAS
+
+A atividade solicita no mínimo 15 vendas distribuídas entre as quatro regiões, incluindo PF e PJ.
+
+Use os exemplos abaixo.
+
+Venda 1:
+
+{
+"id_venda": 1,
+"id_vendedor": 1,
+"id_regiao": 1,
+"data_venda": "2026-10-09 10:00:00",
+"valor_venda": 2000,
+"tipo_cliente": "PF"
+}
+
+Venda 2:
+
+{
+"id_venda": 2,
+"id_vendedor": 2,
+"id_regiao": 2,
+"data_venda": "2026-10-09 11:00:00",
+"valor_venda": 3000,
+"tipo_cliente": "PJ"
+}
+
+Venda 3:
+
+{
+"id_venda": 3,
+"id_vendedor": 3,
+"id_regiao": 3,
+"data_venda": "2026-10-09 12:00:00",
+"valor_venda": 4000,
+"tipo_cliente": "PJ"
+}
+
+Venda 4:
+
+{
+"id_venda": 4,
+"id_vendedor": 4,
+"id_regiao": 4,
+"data_venda": "2026-10-09 13:00:00",
+"valor_venda": 5000,
+"tipo_cliente": "PF"
+}
+
+Venda 5:
+
+{
+"id_venda": 5,
+"id_vendedor": 5,
+"id_regiao": 1,
+"data_venda": "2026-10-09 14:00:00",
+"valor_venda": 2500,
+"tipo_cliente": "PJ"
+}
+
+Venda 6:
+
+{
+"id_venda": 6,
+"id_vendedor": 1,
+"id_regiao": 2,
+"data_venda": "2026-10-09 15:00:00",
+"valor_venda": 3500,
+"tipo_cliente": "PF"
+}
+
+Venda 7:
+
+{
+"id_venda": 7,
+"id_vendedor": 2,
+"id_regiao": 3,
+"data_venda": "2026-10-10 10:00:00",
+"valor_venda": 4500,
+"tipo_cliente": "PJ"
+}
+
+Venda 8:
+
+{
+"id_venda": 8,
+"id_vendedor": 3,
+"id_regiao": 4,
+"data_venda": "2026-10-10 11:00:00",
+"valor_venda": 5500,
+"tipo_cliente": "PF"
+}
+
+Venda 9:
+
+{
+"id_venda": 9,
+"id_vendedor": 4,
+"id_regiao": 1,
+"data_venda": "2026-10-10 12:00:00",
+"valor_venda": 6000,
+"tipo_cliente": "PJ"
+}
+
+Venda 10:
+
+{
+"id_venda": 10,
+"id_vendedor": 5,
+"id_regiao": 2,
+"data_venda": "2026-10-10 13:00:00",
+"valor_venda": 6500,
+"tipo_cliente": "PF"
+}
+
+Venda 11:
+
+{
+"id_venda": 11,
+"id_vendedor": 1,
+"id_regiao": 3,
+"data_venda": "2026-10-10 14:00:00",
+"valor_venda": 7000,
+"tipo_cliente": "PJ"
+}
+
+Venda 12:
+
+{
+"id_venda": 12,
+"id_vendedor": 2,
+"id_regiao": 4,
+"data_venda": "2026-10-10 15:00:00",
+"valor_venda": 7500,
+"tipo_cliente": "PF"
+}
+
+Venda 13:
+
+{
+"id_venda": 13,
+"id_vendedor": 3,
+"id_regiao": 1,
+"data_venda": "2026-10-11 10:00:00",
+"valor_venda": 8000,
+"tipo_cliente": "PJ"
+}
+
+Venda 14:
+
+{
+"id_venda": 14,
+"id_vendedor": 4,
+"id_regiao": 2,
+"data_venda": "2026-10-11 11:00:00",
+"valor_venda": 8500,
+"tipo_cliente": "PF"
+}
+
+Venda 15:
+
+{
+"id_venda": 15,
+"id_vendedor": 5,
+"id_regiao": 3,
+"data_venda": "2026-10-11 12:00:00",
+"valor_venda": 9000,
+"tipo_cliente": "PJ"
+}
+
+14. TESTE - LISTAR VENDAS
+
+Método:
+
+GET
+
+URL:
+
+http://localhost:3000/vendas
+
+Clique em Send.
+
+Devem aparecer as vendas cadastradas.
+
+15. TESTE - CONSULTAR VENDAS POR VENDEDOR
+
+Método:
+
+GET
+
+URL:
+
+http://localhost:3000/vendas/vendedor/1
+
+Clique em Send.
+
+Devem aparecer somente as vendas do vendedor 1.
+
+16. TESTE - CONSULTAR VENDAS POR REGIÃO
+
+Método:
+
+GET
+
+URL:
+
+http://localhost:3000/vendas/regiao/1
+
+Clique em Send.
+
+Devem aparecer somente as vendas da região 1.
+
+17. TESTE - CÓDIGO DE VENDA DUPLICADO
+
+Tente cadastrar novamente uma venda utilizando:
+
+"id_venda": 1
+
+Método:
+
+POST
+
+URL:
+
+http://localhost:3000/vendas
+
+Body:
+
+{
+"id_venda": 1,
+"id_vendedor": 1,
+"id_regiao": 1,
+"data_venda": "2026-10-11 13:00:00",
+"valor_venda": 1000,
+"tipo_cliente": "PF"
+}
+
+Resposta esperada:
+
+{
+"mensagem": "Código de venda já existe"
+}
+
+18. TESTE - VENDEDOR INEXISTENTE
+
+Método:
+
+POST
+
+URL:
+
+http://localhost:3000/vendas
+
+Body:
+
+{
+"id_venda": 20,
+"id_vendedor": 999,
+"id_regiao": 1,
+"data_venda": "2026-10-11 14:00:00",
+"valor_venda": 1000,
+"tipo_cliente": "PF"
+}
+
+Resposta esperada:
+
+{
+"mensagem": "Vendedor não encontrado"
+}
+
+19. TESTE - DESATIVAR VENDEDOR
+
+Método:
+
+PATCH
+
+URL:
+
+http://localhost:3000/vendedores/5/desativar
+
+Clique em Send.
+
+Resposta esperada:
+
+{
+"mensagem": "Vendedor desativado com sucesso"
+}
+
+20. TESTE - VENDA COM VENDEDOR INATIVO
+
+Depois de desativar o vendedor 5:
+
+Método:
+
+POST
+
+URL:
+
+http://localhost:3000/vendas
+
+Body:
+
+{
+"id_venda": 21,
+"id_vendedor": 5,
+"id_regiao": 1,
+"data_venda": "2026-10-11 15:00:00",
+"valor_venda": 1000,
+"tipo_cliente": "PF"
+}
+
+Resposta esperada:
+
+{
+"mensagem": "Vendedor está inativo"
+}
+
+21. TESTE - EXCLUIR VENDA
+
+Método:
+
+DELETE
+
+URL:
+
+http://localhost:3000/vendas/15
+
+Clique em Send.
+
+Resposta esperada:
+
+{
+"mensagem": "Venda excluída com sucesso"
+}
+
+22. TESTE - RELATÓRIO DE PERFORMANCE
+
+Método:
+
+GET
+
+URL:
+
+http://localhost:3000/relatorios/performance?inicio=2026-10-01&fim=2026-10-31
+
+Clique em Send.
+
+O resultado deverá apresentar indicadores como:
+
+* total de vendas;
+* vendas por região;
+* vendas por tipo de cliente;
+* melhor vendedor;
+* maior comissão;
+* metas atingidas;
+* comissão média geral;
+* comissão média por região.
