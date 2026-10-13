@@ -1,4 +1,4 @@
-const express = require("express")
+ const express = require("express")
 const mysql = require("mysql2/promise")
 require("dotenv").config()
 
@@ -91,15 +91,15 @@ async function consultarVendedor(id) {
     }
 }
 
-async function atualizarVendedor(id, metaMensal, percentualBase) {
+async function atualizarVendedor(id, nome, metaMensal, percentualBase) {
 
     try {
 
         let [resultado] = await conexao.execute(
             `UPDATE vendedores
-            SET meta_mensal = ?, percentual_base = ?
+            SET nome =  ?, meta_mensal = ?, percentual_base = ?
             WHERE id_vendedor = ?`,
-            [metaMensal, percentualBase, id]
+            [nome, metaMensal, percentualBase, id]
         )
 
         return resultado
@@ -555,7 +555,7 @@ app.put("/vendedores/:id", async (req, res) => {
 
     try {
 
-        let { meta_mensal, percentual_base } = req.body
+        let { nome, meta_mensal, percentual_base } = req.body
 
         if (meta_mensal === undefined || percentual_base === undefined) {
 
@@ -575,6 +575,7 @@ app.put("/vendedores/:id", async (req, res) => {
 
         await atualizarVendedor(
             req.params.id,
+            nome,
             meta_mensal,
             percentual_base
         )
